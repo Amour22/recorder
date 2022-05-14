@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!--Author: Dahou Amour *** github:http://github.com/Amour22***all Reserved copyright 2022 -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recorder</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            outline: none;
+            box-sizing: border-box;
+            font-family: cursive;
+            
+        }
+        body{
+            width: auto;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: rgb(0, 0, 0);
+            border: 35px outset goldenrod;
+            overflow: hidden;
+        }
+        #container{
+            width: 100%;
+            padding:35px 50px;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+        }
+        h1{
+            color: goldenrod;
+            margin: 20px 0px;
+            cursor: pointer;
+        }
+        #view{
+            width: 100%;
+            height: 100px;
+            min-height: 100px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 2px solid goldenrod;
+            cursor: pointer;
+        }
+        button{
+            width: 50px;
+            height: 50px;
+            margin: 30px 10px;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            letter-spacing: 1.5px;
+            background-color:goldenrod;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        #filesBox{
+            background-color: goldenrod;
+            height: 200px;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+        .clip{
+            height: 65px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .clip audio{
+            width: 100%;
+        }
+        .clip button{
+            background-color: #e0ba34;
+        }
+        #Toggle{
+            z-index: 22;
+            font-size: 2.5em;
+            position: absolute;
+            right: 50px;
+            padding: 5px;
+            color: goldenrod;
+            cursor: help;
+            border-radius: 10%;
+            box-shadow: 0px -3px 7px rgba(96, 95, 92, 0.795),
+            0px 2px 5px rgba(62, 61, 59, 0.5),
+            0px 2px 2px rgba(114, 113, 109, 0.826);                 
+        }
+        nav{
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            font-size: 1.2em;          
+            border: 3px solid goldenrod;
+            padding:35px 50px;
+            background-color: black;
+        }
+        .show{
+            display: block !important;
+        }
+        nav h2{
+            width: 100%;
+            padding: 20px;
+            background-color: black;
+            color: goldenrod;
+        }
+        nav h3{
+            width: 100%;
+            background-color: black;
+            color: goldenrod;
+            font-family:sans-serif;
+            font-size: 0.5em;
+        }
+        nav h3 a{
+            color: goldenrod;
+            font-family:sans-serif;
+        }
+        nav ul{
+            background: goldenrod;
+            border: 10px solid rgb(10, 9, 6);
+            height: 460px;
+            padding: 20px 0px;
+            overflow-y: scroll;
+        }
+        nav ul li{
+            font-family: sans-serif;
+            font-size: 0.8em;
+            padding: 5px;
+            border: 1px dashed;
+            text-align: left;
+            list-style: none;
+        }
+        nav ul li span{
+            margin-right: 10px;
+        }
+        #resetLog{
+            height: 30px;
+            margin: 0 0 10px 0!important;
+            border-radius: 10% !important;
+        }
+        .clipLabel:hover{
+            cursor: pointer;
+        }
+        .clipLabel:hover::before{
+            content: 'rename?';
+            background-color: rgb(224 186 52);
+            position: absolute;
+            z-index: 10;
+            padding: 5px;
+            transform: translate(-11px, 5px);
+        }
+        @media (min-width:769px) {
+            body{
+                border: 30px outset goldenrod;
+                padding: inherit;
+            }
+            #container{
+                max-width: 415px;
+                height: initial;
+                border: 5px solid goldenrod;
+                margin: 50px 0;
+                padding: 0 50px 20px 50px;
+            }
+            nav{
+                width: 25%;
+                right: 46px;
+                left: initial;
+                top: 56px ;
+                font-size: initial;
+                padding: initial;
+            }
+            nav ul{
+                height: 395px;
+            }
+            #Toggle{
+                top: 61px !important;
+                right: 53px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="Toggle">?</div>
+        <nav>
+            <h2>Logs</h2>
+            <ul>
+            </ul>
+            <button id="resetLog">clean</button>
+            <h3>&copy;Copyright <span id="copyYear"></span><a href="http://github.com/Amour22"> dahou Amour</a></h3>
+        </nav>
+        <div>
+            <h1>recorder</h1>
+            <canvas id="view">
+            
+            </canvas>
+            <div id="commande">
+                <button id="record">REC</button>
+                <button id="stop">STOP</button>
+            </div>
+            <div id="filesBox"></div>
+        </div>
+    </div>
+<script>
+    //declaration des variables
+   let toogleBtn=document.querySelector('#Toggle');
+   let navig=document.querySelector('nav');
+   let LogBx=document.querySelector('ul');
+   let resetLog=document.querySelector('#resetLog');
+   let copyYear=document.querySelector('#copyYear');
+   let record=document.querySelector('#record');
+   let stopRec=document.querySelector('#stop');
+   let canvas=document.querySelector('canvas');
+   let files=document.querySelector('#filesBox');
+   let recordId=0;
+   //on desactive le bouton stop si il n'y a pas de record en cours
+   stopRec.disabled=true;
+
+   //creation de la visualisation
+   let audioCtx;
+   const canvasCtx=canvas.getContext('2d');
+
+    //log config
+    function setLog(log){
+       let nD=new Date();
+       let logTimeH=nD.getHours();
+       let logTimeMin=nD.getMinutes();
+       let logTimeSec=nD.getSeconds();
+       let logItem=document.createElement('li');
+       logItem.textContent=`${logTimeH}:${logTimeMin}:${logTimeSec} ${log}`;
+       LogBx.appendChild(logItem);
+    }
+
+   //main
+   if (navigator.mediaDevices.getUserMedia) {
+       let log1='getUserMedia suported';
+       setLog(log1);
+       const constraints={audio:true};
+       let patern=[];
+
+       let onSuccess=function(stream){
+           let mediaRecorder = new MediaRecorder(stream);
+
+           visualize(stream);
+
+           record.onclick=function(){
+               mediaRecorder.start();
+               let log2=mediaRecorder.state;
+               let log3='recorder started';
+               setLog(log2);
+               setLog(log3);
+               record.style='background:red';
+
+               stopRec.disabled=false;
+               record.disabled=true;
+           }
+
+           stopRec.onclick=function(){
+               mediaRecorder.stop();
+               let log4=mediaRecorder.state;
+               let log5='recorder stopped';
+               setLog(log4);
+               setLog(log5);
+               record.style='background:goldenrod';
+
+               stopRec.disabled=true;
+               record.disabled=false; 
+           }
+           mediaRecorder.onstop=(e)=>{
+               let log6='data available after mediaRecorder.stop() called';
+               setLog(log6);
+               const clipName=prompt('renommer l\'enregistrement');
+
+               const clipContainer=document.createElement('div');
+               const clipLabel=document.createElement('p');
+               clipLabel.className='clipLabel';
+               const audio=document.createElement('audio');
+               const deleteBtn=document.createElement('button');
+
+               clipContainer.classList.add('clip');
+               audio.setAttribute('control','');
+               deleteBtn.textContent='X';
+               deleteBtn.className='delete';
+
+               if (clipName===null||clipName=='') {
+                   recordId+=1;
+                   clipLabel.textContent="rec 0"+recordId;
+                   let log7='clip named by default value';
+                   setLog(log7);
+               }else{
+                clipLabel.textContent=clipName;  
+                let log7='clip named succesfuly';
+                setLog(log7);
+               }
+               clipContainer.appendChild(clipLabel);
+               clipContainer.appendChild(audio);
+               clipContainer.appendChild(deleteBtn);
+               files.appendChild(clipContainer);
+
+               audio.controls=true;
+               const blob = new Blob(patern, {'type' : 'audio/ogg: codecs=opus'});
+               patern=[];
+               const audioUrl = window.URL.createObjectURL(blob);
+               audio.src=audioUrl;
+               let log8='record stopped';
+               setLog(log8);
+
+               deleteBtn.onclick=(e)=>{
+                    let evtTgt=e.target;
+                    evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);  
+                    let log9=`clip ${clipLabel.textContent} are deleted`;
+                    setLog(log9);
+               }
+
+               clipLabel.onclick=()=>{
+                    const existingName=clipLabel.textContent;
+                    const newClipName=prompt('renommer l\'enregistrement');
+                    if (newClipName===null||newClipName=='') {
+                        clipLabel.textContent=existingName;
+                    }else{
+                        clipLabel.textContent=newClipName;  
+                        let log10=`clip ${existingName} are renamed ${clipLabel.textContent}`;
+                        setLog(log10);
+                    }
+               }
+           }
+           mediaRecorder.ondataavailable=(e)=>{
+               patern.push(e.data);
+           }
+       }
+       let onError=(err)=>{
+           let log11='une erreur est survenue '+err;
+           setLog(log11);
+       }
+       navigator.mediaDevices.getUserMedia(constraints).then(onSuccess,onError);
+   }else{
+       let log12='getUserMedia not suported';
+       setLog(log12);
+   }
+   //log resetting
+   resetLog.onclick=()=>{
+       LogBx.innerHTML='';
+   }
+   function visualize(stream) {
+       if (!audioCtx) {
+           audioCtx = new AudioContext(); 
+       }
+
+       const source=audioCtx.createMediaStreamSource(stream);
+
+       const analyser=audioCtx.createAnalyser();
+
+       analyser.fftSize=2048;
+
+       const bufferLength=analyser.frequencyBinCount;
+
+       const dataArray=new Uint8Array(bufferLength);
+
+       source.connect(analyser);
+
+       draw();
+
+       function draw() {
+           const WIDTH=canvas.width;
+           const HEIGHT=canvas.height;
+
+           requestAnimationFrame(draw);
+
+           analyser.getByteTimeDomainData(dataArray);
+
+           canvasCtx.fillStyle='rgb(0, 0, 0)';
+           canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+           canvasCtx.lineWidth=3;
+           canvasCtx.strokeStyle='rgb(218, 165, 32)';
+
+           canvasCtx.beginPath();
+
+           let sliceWidth = WIDTH*1.0/bufferLength;
+           let x=0;
+
+           for (let i = 0; i < bufferLength; i++) {
+               
+            let v=dataArray[i]/128.0;
+            let y=v*HEIGHT/2;
+
+            if (i===0) {
+                canvasCtx.moveTo(x,y);
+            }else{
+                canvasCtx.lineTo(x,y);
+            }
+
+            x+=sliceWidth;
+           }
+
+           canvasCtx.lineTo(canvas.width,canvas.height/2);
+           canvasCtx.stroke();
+       }
+   }
+
+   //copyright update
+   let nDate=new Date();
+   copyYear.textContent=nDate.getFullYear();
+
+   //navigation
+   toogleBtn.onclick=()=>{
+       navig.classList.toggle('show');
+       if (navig.classList.contains('show')) {
+           toogleBtn.textContent='X';
+           toogleBtn.style='font-size: 1.5em !important;top:22px';
+       }else{
+           toogleBtn.textContent='?';
+           toogleBtn.style='top:0px !important';
+           toogleBtn.style='font-size: 2.5em !important';
+       }
+   }
+</script>
+</body>
+</html>

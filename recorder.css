@@ -1,0 +1,232 @@
+*{
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: cursive;
+    
+}
+body{
+    width: auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    border: 35px outset goldenrod;
+    overflow: hidden;
+}
+#container{
+    width: 100%;
+    padding:0px 35px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+}
+h1{
+    color: goldenrod;
+    margin: 20px 0px;
+    cursor: pointer;
+}
+#view{
+    width: 100%;
+    height: 100px;
+    min-height: 100px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 2px solid goldenrod;
+    cursor: pointer;
+}
+button{
+    width: 50px;
+    height: 50px;
+    margin: 30px 10px;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 1.5px;
+    background-color:goldenrod;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#filesBox{
+    background-color: goldenrod;
+    height: 200px;
+    padding: 10px;
+    overflow-y: scroll;
+}
+.clip{
+    height: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: flex-start;
+}
+.clip audio{
+    width: 100%;
+}
+.clip button{
+    background-color: #e0ba34;
+}
+#Toggle{
+    z-index: 22;
+    font-size: 2.5em;
+    position: absolute;
+    right: 50px;
+    padding: 5px;
+    color: goldenrod;
+    cursor: help;
+    border-radius: 10%;
+    box-shadow: 0px -3px 7px rgba(96, 95, 92, 0.795),
+    0px 2px 5px rgba(62, 61, 59, 0.5),
+    0px 2px 2px rgba(114, 113, 109, 0.826);                 
+}
+nav{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    font-size: 1.2em;          
+    border: 3px solid goldenrod;
+    padding:35px 50px;
+    background-color: black;
+    z-index: 10;
+}
+.show{
+    display: block !important;
+}
+nav h2{
+    width: 100%;
+    padding: 20px;
+    background-color: black;
+    color: goldenrod;
+}
+nav h3{
+    width: 100%;
+    background-color: black;
+    color: goldenrod;
+    font-family:sans-serif;
+    font-size: 0.5em;
+}
+nav h3 a{
+    color: goldenrod;
+    font-family:sans-serif;
+}
+nav ul{
+    background: goldenrod;
+    border: 10px solid rgb(10, 9, 6);
+    height: 460px;
+    padding: 20px 0px;
+    overflow-y: scroll;
+}
+nav ul li{
+    font-family: sans-serif;
+    font-size: 0.8em;
+    padding: 5px;
+    border: 1px dashed;
+    text-align: left;
+    list-style: none;
+}
+nav ul li span{
+    margin-right: 10px;
+}
+#resetLog{
+    height: 30px;
+    margin: 0 0 10px 0!important;
+    border-radius: 10% !important;
+}
+.clipLabel:hover{
+    cursor: pointer;
+}
+.clipLabel:hover::before{
+    content: 'rename?';
+    background-color: rgb(224 186 52);
+    position: absolute;
+    z-index: 10;
+    padding: 5px;
+    transform: translate(-11px, 5px);
+}
+@media (min-width:769px) {
+    body{
+        border: 30px outset goldenrod;
+        padding: inherit;
+    }
+    #container{
+        max-width: 415px;
+        height: initial;
+        border: 5px solid goldenrod;
+        margin: 50px 0;
+        padding: 0 50px 20px 50px;
+    }
+    nav{
+        width: 25%;
+        right: 46px;
+        left: initial;
+        top: 56px ;
+        font-size: initial;
+        padding: initial;
+    }
+    nav ul{
+        height: 395px;
+    }
+    #Toggle{
+        top: 61px !important;
+        right: 53px;
+    }
+}  
+@media (max-width:480px) {
+    h1{
+        margin: 0px 0px 20px 0px;
+    }
+    #Toggle{
+        position: initial;
+        margin-bottom: 20px;
+    }
+    .clip audio{
+        width: 85%;
+    }
+    .clip button{
+        margin: 0;
+        height: 40px;
+        width: 40px;
+    }
+}
+@media (max-width:420px) {
+    body{
+        border: none;
+    }
+    nav{
+        padding: initial;
+        height: 100vh;
+    }
+    nav ul{
+        max-height: 338px;
+    }
+    #container{
+        min-width: 280px;
+        position: absolute;
+        top: 30px;
+    }
+    .clip{
+        flex-wrap: wrap;
+        position: relative;
+    }
+    .clip audio{
+        width: 100%;
+        min-width: 200px;
+        z-index: 3;
+    }
+    .clip button{
+        position: absolute;
+        top: -7px;
+        right: -2px;
+        z-index: 4;
+        border-radius: 118px 78px 89px 45px;
+    }
+}

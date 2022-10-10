@@ -1,9 +1,9 @@
    //declaration des variables
    let toogleBtn=document.querySelector('#Toggle');
-   let navig=document.querySelector('nav');
-   let LogBx=document.querySelector('ul');
+   let navigation=document.querySelector('nav');
+   let LogContainer=document.querySelector('ul');
    let resetLog=document.querySelector('#resetLog');
-   let copyYear=document.querySelector('#copyYear');
+   let copyrightYear=document.querySelector('#copyYear');
    let record=document.querySelector('#record');
    let stopRec=document.querySelector('#stop');
    let canvas=document.querySelector('canvas');
@@ -18,13 +18,13 @@
 
     //log config
     function setLog(log){
-       let nD=new Date();
-       let logTimeH=nD.getHours();
-       let logTimeMin=nD.getMinutes();
-       let logTimeSec=nD.getSeconds();
+       let date=new Date();
+       let logTimeH=date.getHours();
+       let logTimeMin=date.getMinutes();
+       let logTimeSec=date.getSeconds();
        let logItem=document.createElement('li');
        logItem.textContent=`${logTimeH}:${logTimeMin}:${logTimeSec} ${log}`;
-       LogBx.appendChild(logItem);
+       LogContainer.appendChild(logItem);
     }
 
    //main
@@ -102,8 +102,8 @@
                setLog(log8);
 
                deleteBtn.onclick=(e)=>{
-                    let evtTgt=e.target;
-                    evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);  
+                    let eventTarget=e.target;
+                    eventTarget.parentNode.parentNode.removeChild(eventTarget.parentNode);  
                     let log9=`clip ${clipLabel.textContent} are deleted`;
                     setLog(log9);
                }
@@ -135,7 +135,7 @@
    }
    //log resetting
    resetLog.onclick=()=>{
-       LogBx.innerHTML='';
+       LogContainer.innerHTML='';
    }
    function visualize(stream) {
        if (!audioCtx) {
@@ -195,13 +195,13 @@
    }
 
    //copyright update
-   let nDate=new Date();
-   copyYear.textContent=nDate.getFullYear();
+   let date=new Date();
+   copyrightYear.textContent=date.getFullYear();
 
    //navigation
    toogleBtn.onclick=()=>{
-       navig.classList.toggle('show');
-       if (navig.classList.contains('show')) {
+       navigation.classList.toggle('show');
+       if (navigation.classList.contains('show')) {
            toogleBtn.textContent='X';
            toogleBtn.style='font-size: 1.5em !important;top:22px';
        }else{

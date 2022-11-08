@@ -1,6 +1,6 @@
    //declaration des variables
    let toogleBtn=document.querySelector('#Toggle');
-   let navigation=document.querySelector('nav');
+   let logSection=document.querySelector('section');
    let LogContainer=document.querySelector('ul');
    let resetLog=document.querySelector('#resetLog');
    let copyrightYear=document.querySelector('#copyYear');
@@ -9,6 +9,7 @@
    let canvas=document.querySelector('canvas');
    let files=document.querySelector('#filesBox');
    let recordId=0;
+
    //on desactive le bouton stop si il n'y a pas de record en cours
    stopRec.disabled=true;
 
@@ -133,6 +134,7 @@
        let log12='getUserMedia not suported';
        setLog(log12);
    }
+
    //log resetting
    resetLog.onclick=()=>{
        LogContainer.innerHTML='';
@@ -198,10 +200,10 @@
    let date=new Date();
    copyrightYear.textContent=date.getFullYear();
 
-   //navigation
+   //Log section
    toogleBtn.onclick=()=>{
-       navigation.classList.toggle('show');
-       if (navigation.classList.contains('show')) {
+       section.classList.toggle('show');
+       if (section.classList.contains('show')) {
            toogleBtn.textContent='X';
            toogleBtn.style='font-size: 1.5em !important;top:22px';
        }else{

@@ -6,6 +6,7 @@
     font-family: cursive;
     
 }
+
 body{
     width: auto;
     height: 100vh;
@@ -17,6 +18,7 @@ body{
     border: 35px outset goldenrod;
     overflow: hidden;
 }
+
 #container{
     width: 100%;
     padding:0px 35px;
@@ -24,11 +26,13 @@ body{
     flex-direction: column;
     background-color: black;
 }
+
 h1{
     color: goldenrod;
     margin: 20px 0px;
     cursor: pointer;
 }
+
 #view{
     width: 100%;
     height: 100px;
@@ -42,6 +46,7 @@ h1{
     border: 2px solid goldenrod;
     cursor: pointer;
 }
+
 button{
     width: 50px;
     height: 50px;
@@ -54,12 +59,14 @@ button{
     border-radius: 50%;
     cursor: pointer;
 }
+
 #filesBox{
     background-color: goldenrod;
     height: 200px;
     padding: 10px;
     overflow-y: scroll;
 }
+
 .clip{
     height: 65px;
     display: flex;
@@ -67,12 +74,15 @@ button{
     align-items: center;
     align-content: flex-start;
 }
+
 .clip audio{
     width: 100%;
 }
+
 .clip button{
     background-color: #e0ba34;
 }
+
 #Toggle{
     z-index: 22;
     font-size: 2.5em;
@@ -86,7 +96,8 @@ button{
     0px 2px 5px rgba(62, 61, 59, 0.5),
     0px 2px 2px rgba(114, 113, 109, 0.826);                 
 }
-nav{
+
+section {
     display: none;
     position: absolute;
     left: 0;
@@ -98,34 +109,40 @@ nav{
     background-color: black;
     z-index: 10;
 }
+
 .show{
     display: block !important;
 }
-nav h2{
+
+section h2{
     width: 100%;
     padding: 20px;
     background-color: black;
     color: goldenrod;
 }
-nav h3{
+
+section h3{
     width: 100%;
     background-color: black;
     color: goldenrod;
     font-family:sans-serif;
     font-size: 0.5em;
 }
-nav h3 a{
+
+section h3 a{
     color: goldenrod;
     font-family:sans-serif;
 }
-nav ul{
+
+section ul{
     background: goldenrod;
     border: 10px solid rgb(10, 9, 6);
     height: 460px;
     padding: 20px 0px;
     overflow-y: scroll;
 }
-nav ul li{
+
+section ul li{
     font-family: sans-serif;
     font-size: 0.8em;
     padding: 5px;
@@ -133,17 +150,21 @@ nav ul li{
     text-align: left;
     list-style: none;
 }
-nav ul li span{
+
+section ul li span{
     margin-right: 10px;
 }
+
 #resetLog{
     height: 30px;
     margin: 0 0 10px 0!important;
     border-radius: 10% !important;
 }
+
 .clipLabel:hover{
     cursor: pointer;
 }
+
 .clipLabel:hover::before{
     content: 'rename?';
     background-color: rgb(224 186 52);
@@ -152,11 +173,13 @@ nav ul li span{
     padding: 5px;
     transform: translate(-11px, 5px);
 }
+
 @media (min-width:769px) {
     body{
         border: 30px outset goldenrod;
         padding: inherit;
     }
+    
     #container{
         max-width: 415px;
         height: initial;
@@ -164,7 +187,8 @@ nav ul li span{
         margin: 50px 0;
         padding: 0 50px 20px 50px;
     }
-    nav{
+    
+    section{
         width: 25%;
         right: 46px;
         left: initial;
@@ -172,56 +196,69 @@ nav ul li span{
         font-size: initial;
         padding: initial;
     }
-    nav ul{
+    
+    section ul{
         height: 395px;
     }
+    
     #Toggle{
         top: 61px !important;
         right: 53px;
     }
 }  
+
 @media (max-width:480px) {
     h1{
         margin: 0px 0px 20px 0px;
     }
+    
     #Toggle{
         position: initial;
         margin-bottom: 20px;
     }
+    
     .clip audio{
         width: 85%;
     }
+    
     .clip button{
         margin: 0;
         height: 40px;
         width: 40px;
     }
 }
+
 @media (max-width:420px) {
     body{
         border: none;
     }
-    nav{
+    
+    section{
         padding: initial;
         height: 100vh;
     }
-    nav ul{
+    
+    section ul{
         max-height: 338px;
     }
+    
     #container{
         min-width: 280px;
         position: absolute;
         top: 30px;
     }
+    
     .clip{
         flex-wrap: wrap;
         position: relative;
     }
+    
     .clip audio{
         width: 100%;
         min-width: 200px;
         z-index: 3;
     }
+    
     .clip button{
         position: absolute;
         top: -7px;

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--Author: Dahou Amour *** github:http://github.com/Amour22***all Reserved copyright 2022 -->
 <html lang="fr">
+
 <head>
     <!--meta-->
     <meta charset="UTF-8">
@@ -11,29 +12,44 @@
     <!--css link-->
     <link rel="stylesheet" href="recorder.css">
 </head>
+
 <body>
-    <div id="container">
-        <!--log button-->
-        <div id="Toggle">?</div>
-        <!--log container-->
-        <section>
-            <h2>Logs</h2>
+
+    <header>
+        <h1>record<span>V</span></h1>
+        <a class="seeLogs">logs ?</a>
+    </header>
+
+    <main>
+        <!--principal section-->
+        <section class="principal">
+            <!--displays visualizer with canva-->
+            <canvas class="screen"> </canvas>
+            <!--controls board-->
+            <div class="controls">
+                <button class="record">REC</button>
+                <button class="stop">STOP</button>
+            </div>
+            <!--will contains all audio files-->
+            <div class="files-container"></div>
+        </section>
+        <!--log section-->
+        <section class="logs-container">
+            <!--log container! log will be fill dinamically-->
             <ul>
             </ul>
-            <button id="resetLog">clean</button>
-            <h3>&copy;Copyright <span id="copyYear"></span><a href="http://github.com/Amour22"> dahou Amour</a></h3>
+            <button class="resetLog">clean</button>
+            <!--reset all log -->
         </section>
-        <!--principal-->
-        <div>
-            <h1>recorder</h1>
-            <canvas id="view"> </canvas>
-            <div id="commande">
-                <button id="record">REC</button>
-                <button id="stop">STOP</button>
-            </div>
-            <div id="filesBox"></div>
-        </div>
-    </div>
-<script src="recorder.js"></script>
+    </main>
+
+    <footer>
+        <p>
+            &copy; Copyright <span class="copyrightYear"></span><a href="http://github.com/Amour22"> dereck22</a>
+        </p>
+    </footer>
+
+    <script src="recorder.js"></script>
 </body>
+
 </html>

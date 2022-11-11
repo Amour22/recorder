@@ -1,41 +1,117 @@
-*{
+/******************************* ROOT **********************/
+
+:root {
+    --clr-default: #fffdfd;
+    --clr-light: #43120038;
+    --clr-primary: #431200;
+    --clr-secondary: #e0ba34;
+    --clr-dark: #111;
+}
+
+/************************* INITIALIZE *********************/
+
+* {
     padding: 0;
     margin: 0;
     outline: none;
     box-sizing: border-box;
-    font-family: cursive;
-    
+    user-select: none;
+    font-family: sans-serif;
+    cursor: pointer;
+
 }
 
-body{
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--clr-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--clr-default);
+}
+
+
+button {
+    width: 50px;
+    height: 50px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border: none;
+    border-radius: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/****************************** body ************************/
+
+body {
     width: auto;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: rgb(0, 0, 0);
-    border: 35px outset goldenrod;
-    overflow: hidden;
+    background-color: var(--clr-default);
 }
 
-#container{
+/***************************** header *********************/
+
+header {
     width: 100%;
-    padding:0px 35px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-primary);
+}
+
+h1 {
+    padding: 5px;
+    color: var(--clr-default);
+    border: 1px solid var(--clr-default);
+}
+
+h1 span {
+    padding-inline: 5px;
+    color: var(--clr-primary);
+    background-color: var(--clr-default);
+}
+
+.seeLogs {
+    color: var(--clr-default);
+}
+
+/************************ principal section--> ***************/
+
+main {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
-h1{
-    color: goldenrod;
-    margin: 20px 0px;
-    cursor: pointer;
+/************************ principal section--> ***************/
+
+section.principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:20px 15px;
+    background-color: var(--clr-primary);
+    border-radius: 10px;
 }
 
-#view{
+.screen {
     width: 100%;
-    height: 100px;
+    height: 200px;
     min-height: 100px;
     padding: 20px;
     text-align: center;
@@ -43,31 +119,34 @@ h1{
     align-items: center;
     justify-content: center;
     color: white;
-    border: 2px solid goldenrod;
-    cursor: pointer;
+    background-color: var(--clr-dark);
+    border: 2px solid var(--clr-primary);
 }
 
-button{
-    width: 50px;
-    height: 50px;
-    margin: 30px 10px;
-    font-weight: 700;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    letter-spacing: 1.5px;
-    background-color:goldenrod;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
+.controls {
+    padding: 15px;
+    margin-block:0 10px;
+    width: 100%;
+    background-color: var(--clr-dark);
+    border-radius: 10% 10% 10% 10%;
 }
 
-#filesBox{
-    background-color: goldenrod;
+.controls button {
+    background-color: var(--clr-secondary);
+    box-shadow: 1px 1px 1px inset var(--clr-light),
+    3px 3px 5px inset var(--clr-light),
+    0px -2px 10px inset var(--clr-light);
+}
+
+.files-container {
+    width: 100%;
     height: 200px;
     padding: 10px;
     overflow-y: scroll;
+    background-color: var(--clr-dark);
 }
 
-.clip{
+.clip {
     height: 65px;
     display: flex;
     justify-content: space-between;
@@ -75,113 +154,110 @@ button{
     align-content: flex-start;
 }
 
-.clip audio{
-    width: 100%;
+.clipLabel {
+    position: relative;
+    min-width: 30px;
+    color: var(--clr-default);
 }
 
-.clip button{
-    background-color: #e0ba34;
-}
-
-#Toggle{
-    z-index: 22;
-    font-size: 2.5em;
+.clipLabel:hover::before {
+    content: 'rename?';
     position: absolute;
-    right: 50px;
+    top: -35px;
     padding: 5px;
-    color: goldenrod;
-    cursor: help;
-    border-radius: 10%;
-    box-shadow: 0px -3px 7px rgba(96, 95, 92, 0.795),
-    0px 2px 5px rgba(62, 61, 59, 0.5),
-    0px 2px 2px rgba(114, 113, 109, 0.826);                 
-}
-
-section {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    font-size: 1.2em;          
-    border: 3px solid goldenrod;
-    padding:35px 50px;
-    background-color: black;
+    color: var(--clr-dark);
+    background-color: var(--clr-default);
+    transform: translate(-11px, 5px);
     z-index: 10;
 }
 
-.show{
+
+.clip audio {
+    width: 100%;
+}
+
+.clip button.delete {
+    aspect-ratio: 1;
+    margin-left: 15px;
+}
+
+/********************************* log  section ***************/
+
+section.logs-container {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 70px;
+    height: 70%;
+    padding: 35px 50px;
+    width: 70%;
+    font-size: 1.2em;
+    z-index: 10;
+    border-radius: 10px;
+    background-color: var(--clr-primary);
+}
+
+.showLog {
     display: block !important;
 }
 
-section h2{
-    width: 100%;
-    padding: 20px;
-    background-color: black;
-    color: goldenrod;
+.resetLog {
+    position: absolute;
+    width: 60%;
+    height: 40px;
+    bottom: 65px;
+    left: 90px;
+    transition: .5s;
+    border-radius: initial !important;
 }
 
-section h3{
-    width: 100%;
-    background-color: black;
-    color: goldenrod;
-    font-family:sans-serif;
-    font-size: 0.5em;
+.resetLog:hover {
+    color: var(--clr-default);
+    background:var(--clr-primary);
+    border: 2px solid var(--clr-default);
+    border-radius: 7px !important;
 }
 
-section h3 a{
-    color: goldenrod;
-    font-family:sans-serif;
-}
-
-section ul{
-    background: goldenrod;
-    border: 10px solid rgb(10, 9, 6);
+section.logs-container ul {
     height: 460px;
-    padding: 20px 0px;
+    padding: 0px 0px 20px 0px;
     overflow-y: scroll;
+    background: var(--clr-dark);
 }
 
-section ul li{
-    font-family: sans-serif;
+section.logs-container ul li {
     font-size: 0.8em;
     padding: 5px;
     border: 1px dashed;
     text-align: left;
     list-style: none;
+    color: var(--clr-default);
 }
 
-section ul li span{
-    margin-right: 10px;
-}
-
-#resetLog{
-    height: 30px;
-    margin: 0 0 10px 0!important;
-    border-radius: 10% !important;
-}
-
-.clipLabel:hover{
-    cursor: pointer;
-}
-
-.clipLabel:hover::before{
-    content: 'rename?';
-    background-color: rgb(224 186 52);
+footer {
     position: absolute;
-    z-index: 10;
-    padding: 5px;
-    transform: translate(-11px, 5px);
+    bottom: 0;
+    padding-block: 10px;
+    width: 100%;
+    border-top: .5px solid var(--clr-light);
 }
 
-@media (min-width:769px) {
+footer a {
+    color: var(--clr-dark);
+}
+
+/********************************* log  section ***************/
+
+
+
+/* @media (min-width:769px) {
     body{
         border: 30px outset goldenrod;
         padding: inherit;
     }
     
     #container{
-        max-width: 415px;
+        max-width: 520px;
         height: initial;
         border: 5px solid goldenrod;
         margin: 50px 0;
@@ -266,4 +342,4 @@ section ul li span{
         z-index: 4;
         border-radius: 118px 78px 89px 45px;
     }
-}
+} */

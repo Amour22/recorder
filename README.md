@@ -1,7 +1,7 @@
 
 # Recorder
 
- Recorder est un enregistreur audio qui vous permet d'enregistrer du sons et de le télécharger ensuite;
+ Recorder est un enregistreur audio qui vous permet d'enregistrer du son et de le télécharger ensuite;
  
 ## Technologie utilisée
 
